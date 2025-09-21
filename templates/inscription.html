@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Inscription - ISSEA-CEMAC</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="{{ url_for('static', filename = 'bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename = 'headers.css') }}" rel="stylesheet">
+  </head>
+
+  <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+
+      /* Couleur orange pour l'entête */
+      .navbar-orange {
+        background-color: #dd7834 !important;  /* Orange vif */
+      }
+
+      /* Liens en blanc dans l'entête */
+      .navbar-orange .nav-link,
+      .navbar-orange .nav-link.active,
+      .navbar-orange .nav-link:focus,
+      .navbar-orange .nav-link:hover {
+        color: #fff !important;
+      }
+
+      html, body {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    }
+
+    main {
+    flex: 1; /* prend tout l'espace disponible */
+    display: flex;
+    flex-direction: column;
+    }
+
+    footer {
+    margin-top: auto; /* pousse le footer vers le bas */
+    text-align: center;
+    padding: 10px 0;
+    background: #f8f9fa; /* optionnel pour visibilité */
+    border-top: 1px solid #dee2e6;
+    }
+
+
+    </style>
+  <body>
+    
+<main>
+
+  <!-- Barre de navigation -->
+  <nav class="py-2 navbar-orange border-bottom fixed-top">
+    <div class="container d-flex flex-wrap">
+      <ul class="nav me-auto">
+        <img src="../static/Picture1.png" alt="Logo ISSEA-CEMAC" width="40" height="32" class="me-2">
+        <li class="nav-item"><a href="#" class="nav-link link-dark px-2 active">ISSEA-CEMAC</a></li>
+      </ul>
+      <ul class="nav">
+        <li class="nav-item"><a href="{{ url_for('login') }}" class="nav-link link-dark px-2">Se connecter</a></li>
+        <li class="nav-item"><a href="{{ url_for('connexion') }}" class="nav-link link-dark px-2">Accueil</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Contenu -->
+  <div class="container" style="margin-top: 100px; min-height: 70vh;">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <h2 class="mb-4 text-center">Page d'inscription</h2>
+        <form method="post" action="/inscription">
+          
+          <div class="mb-3">
+            <label for="nom" class="form-label">Nom(s)</label>
+            <input type="text" class="form-control" id="nom" name="nom" required>
+          </div>
+
+          <div class="mb-3">
+            <label for="prenom" class="form-label">Prénom(s)</label>
+            <input type="text" class="form-control" id="prenom" name="prenom" required>
+          </div>
+
+          <div class="mb-3">
+            <label for="classe" class="form-label">Classe</label>
+            
+              <select class="form-select" id="classe" name="classe" required>
+                        {% for elts in classe %}
+                            <option value="{{ elts }}">{{ elts }}</option>
+                        {% endfor %}
+              </select>
+          </div>
+
+          <div class="mb-3">
+            <label for="email" class="form-label">Adresse Email</label>
+            <input type="email" class="form-control" id="email" name="email" required>
+          </div>
+
+          <button type="submit" class="btn btn-primary w-100">S’inscrire</button>
+          
+          {% with messages = get_flashed_messages(with_categories=true) %}
+                                        {% if messages %}
+                                            <div class="alert alert-dismissible fade show" role="alert">
+                                            {% for category, message in messages %}
+                                                <div class="alert alert-{{ category }}">{{ message }}</div>
+                                            {% endfor %}
+                                            </div>
+                                        {% endif %}
+            {% endwith %}
+        </form>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<!-- Footer -->
+  <footer class="pt-3 mt-4 text-muted border-top text-center">
+    &copy; 2025 - BY DataCraft AFRICA | ISSEA-CEMAC
+  </footer>
+
+
+  </body>
+</html>
