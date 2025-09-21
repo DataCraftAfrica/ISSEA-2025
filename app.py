@@ -120,8 +120,6 @@ def get_enseignants():
 def update_encadreur():
     data = request.get_json()
     email = data.get("email")
-    nom = data.get("nom")
-    prenoms = data.get("prenoms")
     encadreur = data.get("encadreur")
     classe = data.get("classe")
     print('le voici: ', email)
@@ -137,7 +135,7 @@ def update_encadreur():
 
             subject = 'Information !'
 
-            body = f"""Hello {nom} {prenoms}, \n Un encadreur academique vous a été affecté, veuillez vous connecter pour en savoir plus. \n DataCraft AFRICA, le progrès n'attend pas
+            body = f"""Hello, \n Un encadreur academique vous a été affecté, veuillez vous connecter pour en savoir plus. \n DataCraft AFRICA, le progrès n'attend pas
             """
 
             # Création du message
