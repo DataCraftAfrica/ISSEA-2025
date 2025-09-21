@@ -1,4 +1,3 @@
-#
 from flask import Flask, render_template, request, redirect, url_for, flash, send_from_directory,  jsonify, send_file, session, make_response, current_app
 #from flask_mysqldb import MySQL
 from flask_mail import Mail, Message
@@ -121,6 +120,8 @@ def get_enseignants():
 def update_encadreur():
     data = request.get_json()
     email = data.get("email")
+    nom = data.get("nom")
+    prenoms = data.get("prenoms")
     encadreur = data.get("encadreur")
     classe = data.get("classe")
     print('le voici: ', email)
@@ -136,7 +137,7 @@ def update_encadreur():
 
             subject = 'Information !'
 
-            body = f"""Hello {session["user_info"]["nom"]} {session["user_info"]["prenoms"]}, \n Un encadreur academique vous a été affecté, veuillez vous connecter pour en savoir plus. \n DataCraft AFRICA, le progrès n'attend pas
+            body = f"""Hello {nom} {prenoms}, \n Un encadreur academique vous a été affecté, veuillez vous connecter pour en savoir plus. \n DataCraft AFRICA, le progrès n'attend pas
             """
 
             # Création du message

@@ -277,13 +277,15 @@ document.getElementById("classeSelectAffect").addEventListener("change", functio
 document.addEventListener("click", function(e) {
     if (e.target.classList.contains("save-one")) {
         let email = e.target.dataset.email;
+        let nom = e.target.dataset.nom;
+        let prenoms = e.target.dataset.prenoms;
         let select = document.querySelector(`.encadreur-select[data-email="${email}"]`);
         let encadreur = select.value;
 
         fetch("/update_encadreur", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ email: email, encadreur: encadreur, classe: document.getElementById("classeSelectAffect").value })
+            body: JSON.stringify({ email: email, nom: nom, prenoms: prenoms, encadreur: encadreur, classe: document.getElementById("classeSelectAffect").value })
         })
         .then(r => r.json())
         .then(res => alert(res.message));
