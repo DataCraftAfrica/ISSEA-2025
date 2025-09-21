@@ -1,6 +1,6 @@
 #
 from flask import Flask, render_template, request, redirect, url_for, flash, send_from_directory,  jsonify, send_file, session, make_response, current_app
-from flask_mysqldb import MySQL
+#from flask_mysqldb import MySQL
 from flask_mail import Mail, Message
 from werkzeug.utils import secure_filename
 import psycopg2
