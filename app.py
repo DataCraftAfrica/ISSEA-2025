@@ -29,7 +29,7 @@ import base64
 ### Bibliotheque
 
 app = Flask(__name__)
-app.secret_key = "supersecret"
+app.secret_key = os.environ.get("SECRET_KEY")
 app.config.from_object(Config)
 db.init_app(app)
 
@@ -133,6 +133,17 @@ def update_encadreur():
     for i, row in enumerate(data_rows, start=2):  # +2 car ligne 1 = header
         if row.get("Email") == email:
             worksheet.update_cell(i, list(row.keys()).index("Encadreur_Academique") + 1, encadreur)
+
+            subject = 'Information !'
+
+            body = f"""Hello {session["user_info"]["nom"]} {session["user_info"]["prenoms"]}, \n Un encadreur academique vous a été affecté, veuillez vous connecter pour en savoir plus. \n DataCraft AFRICA, le progrès n'attend pas
+            """
+
+            # Création du message
+            msg = Message(subject, sender='appsrf42@gmail.com', recipients=[email])
+            msg.body = body
+
+            mail.send(msg)
             return jsonify({"message": f"Affectation mise à jour pour {email}"})
 
     return jsonify({"message": "Email non trouvé"}), 404
